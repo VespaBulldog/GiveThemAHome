@@ -15,6 +15,8 @@
 		20EEF5581D22511A0059D034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20EEF5561D22511A0059D034 /* LaunchScreen.storyboard */; };
 		20EEF5631D22511A0059D034 /* GiveThemAHomeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 20EEF5621D22511A0059D034 /* GiveThemAHomeTests.m */; };
 		20EEF56E1D22511A0059D034 /* GiveThemAHomeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 20EEF56D1D22511A0059D034 /* GiveThemAHomeUITests.m */; };
+		20EEF57E1D2251D30059D034 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 20EEF57D1D2251D30059D034 /* ImageCache.m */; };
+		20EEF5821D2251FA0059D034 /* ImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20EEF5811D2251FA0059D034 /* ImageModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,10 @@
 		20EEF5691D22511A0059D034 /* GiveThemAHomeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiveThemAHomeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20EEF56D1D22511A0059D034 /* GiveThemAHomeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GiveThemAHomeUITests.m; sourceTree = "<group>"; };
 		20EEF56F1D22511A0059D034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20EEF57C1D2251D30059D034 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageCache.h; path = Cache/ImageCache.h; sourceTree = "<group>"; };
+		20EEF57D1D2251D30059D034 /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageCache.m; path = Cache/ImageCache.m; sourceTree = "<group>"; };
+		20EEF5801D2251FA0059D034 /* ImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageModel.h; path = Model/ImageModel.h; sourceTree = "<group>"; };
+		20EEF5811D2251FA0059D034 /* ImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageModel.m; path = Model/ImageModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,8 @@
 		20EEF5471D22511A0059D034 /* GiveThemAHome */ = {
 			isa = PBXGroup;
 			children = (
+				20EEF57F1D2251E60059D034 /* Model */,
+				20EEF57B1D22519B0059D034 /* Cache */,
 				20EEF54B1D22511A0059D034 /* AppDelegate.h */,
 				20EEF54C1D22511A0059D034 /* AppDelegate.m */,
 				20EEF54E1D22511A0059D034 /* ViewController.h */,
@@ -138,6 +146,24 @@
 				20EEF56F1D22511A0059D034 /* Info.plist */,
 			);
 			path = GiveThemAHomeUITests;
+			sourceTree = "<group>";
+		};
+		20EEF57B1D22519B0059D034 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				20EEF57C1D2251D30059D034 /* ImageCache.h */,
+				20EEF57D1D2251D30059D034 /* ImageCache.m */,
+			);
+			name = Cache;
+			sourceTree = "<group>";
+		};
+		20EEF57F1D2251E60059D034 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				20EEF5801D2251FA0059D034 /* ImageModel.h */,
+				20EEF5811D2251FA0059D034 /* ImageModel.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,8 +296,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20EEF5821D2251FA0059D034 /* ImageModel.m in Sources */,
 				20EEF5501D22511A0059D034 /* ViewController.m in Sources */,
 				20EEF54D1D22511A0059D034 /* AppDelegate.m in Sources */,
+				20EEF57E1D2251D30059D034 /* ImageCache.m in Sources */,
 				20EEF54A1D22511A0059D034 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,6 +444,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GiveThemAHome/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Evan.GiveThemAHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -427,6 +456,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GiveThemAHome/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Evan.GiveThemAHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
