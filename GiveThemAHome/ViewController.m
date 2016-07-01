@@ -9,8 +9,9 @@
 #import "ViewController.h"
 #import "ImageModel.h"
 #import "ImageCache.h"
+#import "Cell.h"
 
-@interface ViewController ()<NSURLSessionDelegate>
+@interface ViewController ()<NSURLSessionDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     int currentPage;
     NSURLSessionConfiguration *defaultConfigObject;
@@ -19,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *arr_ImgURL;
 @property (nonatomic, strong) NSMutableArray *arr_Result;
-@property (nonatomic, strong) NSOperationQueue *opQueue;
+@property (nonatomic, strong) NSOperationQueue *imageQueue;
 @property (nonatomic, strong) ImageCache *cache;
 @end
 
@@ -27,20 +28,43 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _arr_ImgURL = [[NSMutableArray alloc] init];
-    _cache = [ImageCache sharedImageCache];
-    _opQueue = [[NSOperationQueue alloc] init];
-    _opQueue.maxConcurrentOperationCount = 3;
-    _arr_Result = [[NSMutableArray alloc] init];
-    currentPage = 0;
+    [self initProperty];
     [self getResultData];
 }
 
-- (void)didReceiveMemoryWarning {
+//-(void) viewDidLayoutSubviews
+//{
+//    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)])
+//    {
+//        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+//    }
+//    
+//    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])
+//    {
+//        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+//    }
+//}
+
+-(void)initProperty
+{
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.hidden = YES;
+    _cache = [ImageCache sharedImageCache];
+    _arr_ImgURL = [[NSMutableArray alloc] init];
+    _imageQueue = [[NSOperationQueue alloc] init];
+    _imageQueue.maxConcurrentOperationCount = 3;
+    _arr_Result = [[NSMutableArray alloc] init];
+    [_tableView registerNib:[UINib nibWithNibName:@"Cell" bundle:nil] forCellReuseIdentifier:@"Cell"];
+    [self.tableView setSeparatorColor:[UIColor blackColor]];
+    _tableView.estimatedRowHeight = 260.f;
+    _tableView.rowHeight = UITableViewAutomaticDimension;
+    currentPage = 0;
+}
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 - (IBAction)add:(id)sender
 {
@@ -54,8 +78,8 @@
 //    NSString *urlString = @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=1000";
     NSURL * url = [NSURL URLWithString:urlString];
     
-    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
+    defaultConfigObject = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
     
     
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -64,6 +88,7 @@
                                                             if(error == nil)
                                                             {
                                                                 [self saveResultData:data];
+                                                                _tableView.hidden = NO;
                                                             }
                                                         }];
         
@@ -92,28 +117,42 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _arr_Result.count;
+    return _arr_ImgURL.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell * cell = [[UITableViewCell alloc] init];
-    
+//    UITableViewCell * cell = [[UITableViewCell alloc] init];
+    Cell *cell = (Cell *)[_tableView dequeueReusableCellWithIdentifier:@"Cell"];
     ImageModel *m = [_arr_ImgURL objectAtIndex:indexPath.row];
     if ([_cache.allImageCache objectForKey:m.album_file])
     {
-        cell.imageView.image = [_cache.allImageCache objectForKey:m.album_file];
+        cell.image.image = [_cache.allImageCache objectForKey:m.album_file];
     }
     else
     {
+        cell.image.image = [UIImage imageNamed:@"picture"];
         [self downloadImage:indexPath];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"%i",indexPath.row];
+//    cell.textLabel.text = [NSString stringWithFormat:@"%i",indexPath.row];
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 300;
+    return 260;
 }
 
 - (void)downloadImage:(NSIndexPath *)indexPath
@@ -128,7 +167,7 @@
     
     defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
     defaultConfigObject.timeoutIntervalForResource = 6;
-    defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: _opQueue];
+    defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: _imageQueue];
     
     NSURL * url = [NSURL URLWithString:m.album_file];
     

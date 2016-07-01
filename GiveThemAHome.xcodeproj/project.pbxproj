@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		203D25DB1D24FF7800B769C8 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 203D25D91D24FF7800B769C8 /* Cell.m */; };
+		203D25DC1D24FF7800B769C8 /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 203D25DA1D24FF7800B769C8 /* Cell.xib */; };
 		20EEF54A1D22511A0059D034 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 20EEF5491D22511A0059D034 /* main.m */; };
 		20EEF54D1D22511A0059D034 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 20EEF54C1D22511A0059D034 /* AppDelegate.m */; };
 		20EEF5501D22511A0059D034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20EEF54F1D22511A0059D034 /* ViewController.m */; };
@@ -37,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		203D25D81D24FF7800B769C8 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Cell.h; path = View/Cell.h; sourceTree = "<group>"; };
+		203D25D91D24FF7800B769C8 /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Cell.m; path = View/Cell.m; sourceTree = "<group>"; };
+		203D25DA1D24FF7800B769C8 /* Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Cell.xib; path = View/Cell.xib; sourceTree = "<group>"; };
 		20EEF5451D22511A0059D034 /* GiveThemAHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiveThemAHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20EEF5491D22511A0059D034 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		20EEF54B1D22511A0059D034 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -84,6 +89,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		203D25D21D24F2EA00B769C8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				203D25D81D24FF7800B769C8 /* Cell.h */,
+				203D25D91D24FF7800B769C8 /* Cell.m */,
+				203D25DA1D24FF7800B769C8 /* Cell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		20EEF53C1D22511A0059D034 = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +124,7 @@
 			children = (
 				20EEF57F1D2251E60059D034 /* Model */,
 				20EEF57B1D22519B0059D034 /* Cache */,
+				203D25D21D24F2EA00B769C8 /* View */,
 				20EEF54B1D22511A0059D034 /* AppDelegate.h */,
 				20EEF54C1D22511A0059D034 /* AppDelegate.m */,
 				20EEF54E1D22511A0059D034 /* ViewController.h */,
@@ -270,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20EEF5581D22511A0059D034 /* LaunchScreen.storyboard in Resources */,
+				203D25DC1D24FF7800B769C8 /* Cell.xib in Resources */,
 				20EEF5551D22511A0059D034 /* Assets.xcassets in Resources */,
 				20EEF5531D22511A0059D034 /* Main.storyboard in Resources */,
 			);
@@ -301,6 +318,7 @@
 				20EEF54D1D22511A0059D034 /* AppDelegate.m in Sources */,
 				20EEF57E1D2251D30059D034 /* ImageCache.m in Sources */,
 				20EEF54A1D22511A0059D034 /* main.m in Sources */,
+				203D25DB1D24FF7800B769C8 /* Cell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +546,7 @@
 				20EEF5741D22511A0059D034 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		20EEF5751D22511A0059D034 /* Build configuration list for PBXNativeTarget "GiveThemAHomeTests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +555,7 @@
 				20EEF5771D22511A0059D034 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		20EEF5781D22511A0059D034 /* Build configuration list for PBXNativeTarget "GiveThemAHomeUITests" */ = {
 			isa = XCConfigurationList;
@@ -544,6 +564,7 @@
 				20EEF57A1D22511A0059D034 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
