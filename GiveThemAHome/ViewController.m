@@ -16,7 +16,11 @@
     int currentPage;
     NSURLSessionConfiguration *defaultConfigObject;
     NSURLSession *defaultSession;
+//    BOOL hiddenFooter;
 }
+//@property (weak, nonatomic) IBOutlet UIButton *btn;
+@property (weak, nonatomic) IBOutlet UIView *footerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *footerViewHeight;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *arr_ImgURL;
 @property (nonatomic, strong) NSMutableArray *arr_Result;
@@ -50,6 +54,14 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.hidden = YES;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 36)];
+    view.backgroundColor = [UIColor grayColor];
+    UIActivityIndicatorView *ac = [[UIActivityIndicatorView alloc]
+                                   initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [ac startAnimating];
+    [view addSubview:ac]; // <-- Your UIActivityIndicatorView
+    self.tableView.tableFooterView = view;
+//    self.tableView.tableFooterView.hidden = YES;
     _cache = [ImageCache sharedImageCache];
     _arr_ImgURL = [[NSMutableArray alloc] init];
     _imageQueue = [[NSOperationQueue alloc] init];
@@ -57,9 +69,11 @@
     _arr_Result = [[NSMutableArray alloc] init];
     [_tableView registerNib:[UINib nibWithNibName:@"Cell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     [self.tableView setSeparatorColor:[UIColor blackColor]];
-    _tableView.estimatedRowHeight = 260.f;
+    _tableView.estimatedRowHeight = 270.f;
     _tableView.rowHeight = UITableViewAutomaticDimension;
+    _footerViewHeight.constant = 0;
     currentPage = 0;
+//    hiddenFooter = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,6 +103,8 @@
                                                             {
                                                                 [self saveResultData:data];
                                                                 _tableView.hidden = NO;
+//                                                                self.tableView.tableFooterView.hidden = YES;
+//                                                                _footerViewHeight.constant = 0;
                                                             }
                                                         }];
         
@@ -148,11 +164,32 @@
     {
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
+    
+    NSIndexPath *lastRow = [NSIndexPath indexPathForRow:[_arr_ImgURL count]-1 inSection:0];
+    
+    if (indexPath == lastRow)
+    {
+//        _footerViewHeight.constant = 30;
+//        self.tableView.tableFooterView.hidden = NO;
+        [self add:nil];
+    }
 }
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section;
+//{
+//    if (hiddenFooter)
+//    {
+//        return 0.f;
+//    }
+//    else
+//    {
+//        return 30.f;
+//    }
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 260;
+    return 270;
 }
 
 - (void)downloadImage:(NSIndexPath *)indexPath

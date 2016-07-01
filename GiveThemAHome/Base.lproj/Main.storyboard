@@ -18,41 +18,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="260" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L1v-7b-4ZX">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="550"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="570"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CtH-ue-a4B">
-                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
-                                <color key="backgroundColor" red="1" green="0.35604304399999998" blue="0.65154187900000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aYL-qd-bIZ">
+                                <rect key="frame" x="0.0" y="570" width="600" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="SMA-OY-Ce1"/>
-                                    <constraint firstAttribute="width" constant="46" id="l0o-09-sBF"/>
+                                    <constraint firstAttribute="height" constant="30" id="GoF-GG-ZkG"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="l0o-09-sBF"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="add:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3vU-Su-NkM"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="CtH-ue-a4B" secondAttribute="trailing" id="95X-HI-68B"/>
                             <constraint firstItem="L1v-7b-4ZX" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="9nD-8b-gCi"/>
+                            <constraint firstItem="aYL-qd-bIZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="C1s-hA-ea3"/>
+                            <constraint firstAttribute="trailing" secondItem="aYL-qd-bIZ" secondAttribute="trailing" id="Du3-BK-BNU"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="L1v-7b-4ZX" secondAttribute="bottom" constant="50" id="Jsh-LS-g3k"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="CtH-ue-a4B" secondAttribute="bottom" id="ZBL-vF-Fsf"/>
-                            <constraint firstItem="CtH-ue-a4B" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dze-32-ziS"/>
+                            <constraint firstItem="aYL-qd-bIZ" firstAttribute="top" secondItem="L1v-7b-4ZX" secondAttribute="bottom" id="KhF-nq-SI1"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="aYL-qd-bIZ" secondAttribute="bottom" id="ZYP-U4-Guo"/>
                             <constraint firstItem="L1v-7b-4ZX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iOO-xO-xFT"/>
                             <constraint firstAttribute="trailing" secondItem="L1v-7b-4ZX" secondAttribute="trailing" id="qiy-dB-jJY"/>
-                            <constraint firstItem="CtH-ue-a4B" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rET-dZ-6kE"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Jsh-LS-g3k"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="RQw-aX-zpg"/>
                     <connections>
+                        <outlet property="footerView" destination="aYL-qd-bIZ" id="3Mr-yL-zS4"/>
+                        <outlet property="footerViewHeight" destination="GoF-GG-ZkG" id="8QV-2E-cx8"/>
                         <outlet property="tableView" destination="L1v-7b-4ZX" id="dtl-Va-jIy"/>
                     </connections>
                 </viewController>
