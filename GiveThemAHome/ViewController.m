@@ -54,10 +54,18 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.hidden = YES;
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 36)];
-    view.backgroundColor = [UIColor grayColor];
-    UIActivityIndicatorView *ac = [[UIActivityIndicatorView alloc]
-                                   initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 36)];
+//    view.backgroundColor = [UIColor grayColor];
+    UIImageView *ac = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,16,16)];
+    
+    ac.animationImages = [NSArray arrayWithObjects:[UIImage imageNamed:@"add-1.png"],[UIImage imageNamed:@"add-2.png"],nil];
+    ac.animationDuration = 1.0; // in seconds
+    ac.animationRepeatCount = 0; // sets to loop
+    
+    [ac startAnimating]; // starts animating
+//    [ac stopAnimating];
+//    UIActivityIndicatorView *ac = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    ac.center = view.center;
     [ac startAnimating];
     [view addSubview:ac]; // <-- Your UIActivityIndicatorView
     self.tableView.tableFooterView = view;
